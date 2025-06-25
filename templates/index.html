@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Product Prediction</title>
+</head>
+<body>
+    <h2>Enter Traveler Details</h2>
+    <form method="POST" action="/predict">
+        {% for feature in ['Age', 'CityTier', 'DurationOfPitch', 'NumberOfFollowups', 'PreferredPropertyStar', 'NumberOfTrips', 'Passport', 'PitchSatisfactionScore', 'OwnCar', 'MonthlyIncome', 'TotalVisits'] %}
+            <label>{{ feature }}:</label>
+            <input type="number" step="any" name="{{ feature }}" required><br><br>
+        {% endfor %}
+
+        {% for cat_feature, options in categories.items() %}
+            <label>{{ cat_feature }}:</label>
+            <select name="{{ cat_feature }}" required>
+                {% for option in options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select><br><br>
+        {% endfor %}
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
