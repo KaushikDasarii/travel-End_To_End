@@ -4,12 +4,23 @@ import pickle
 
 app = Flask(__name__)
 
-# ✅ Load trained pipeline model
-model = pickle.load(open("model.pkl", "rb"))
+# Load the trained pipeline model
+with open("model.pkl", "rb") as f:
+    model = pickle.load(f)
+
+# Define categorical feature options to populate dropdowns in HTML
+categories = {
+    'TypeofContact': ['Self Enquiry', 'Company Invited'],
+    'Occupation': ['Salaried', 'Small Business', 'Large Business'],
+    'Gender': ['Male', 'Female'],
+    'ProductPitched': ['Basic', 'Standard', 'Deluxe'],
+    'MaritalStatus': ['Married', 'Single', 'Divorced'],
+    'Designation': ['Executive', 'Manager', 'Senior Manager', 'AVP', 'VP']
+}
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", categories=categories)
 
 @app.route("/predict", methods=["POST"])
 def predict():
@@ -37,8 +48,8 @@ def predict():
         input_df = pd.DataFrame([input_data])
         prediction = model.predict(input_df)[0]
         output = "Yes" if prediction == 1 else "No"
-
         return render_template("result.html", prediction=output)
+
     except Exception as e:
         return f"Error: {e}"
 
