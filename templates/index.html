@@ -6,7 +6,7 @@
 <body>
     <h2>Enter Traveler Details</h2>
     <form method="POST" action="/predict">
-        {% for feature in ['Age', 'CityTier', 'DurationOfPitch', 'NumberOfFollowups', 'PreferredPropertyStar', 'NumberOfTrips', 'Passport', 'PitchSatisfactionScore', 'OwnCar', 'MonthlyIncome', 'TotalVisitings'] %}
+        {% for feature in ['Age', 'CityTier', 'DurationOfPitch', 'NumberOfFollowups', 'PreferredPropertyStar', 'NumberOfTrips', 'Passport', 'PitchSatisfactionScore', 'OwnCar', 'MonthlyIncome', 'TotalVisiting'] %}
             <label>{{ feature }}:</label>
             <input type="number" step="any" name="{{ feature }}" required><br><br>
         {% endfor %}
