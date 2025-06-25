@@ -4,8 +4,8 @@ import pickle
 
 app = Flask(__name__)
 
-# Load trained pipeline model
-model = pickle.load(open("cleaned_travel.pkl", "rb"))
+# ✅ Load trained pipeline model
+model = pickle.load(open("model.pkl", "rb"))
 
 @app.route("/")
 def home():
@@ -33,11 +33,16 @@ def predict():
             'MonthlyIncome': float(request.form['MonthlyIncome']),
             'TotalVisits': float(request.form['TotalVisits']),
         }
+
         input_df = pd.DataFrame([input_data])
         prediction = model.predict(input_df)[0]
-        return render_template("result.html", prediction=prediction)
+        output = "Yes" if prediction == 1 else "No"
+
+        return render_template("result.html", prediction=output)
     except Exception as e:
         return f"Error: {e}"
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
