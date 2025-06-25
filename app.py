@@ -42,7 +42,7 @@ def predict():
             'OwnCar': int(request.form['OwnCar']),
             'Designation': request.form['Designation'],
             'MonthlyIncome': float(request.form['MonthlyIncome']),
-            'TotalVisits': float(request.form['TotalVisits']),
+            'TotalVisiting': float(request.form['TotalVisiting']),
         }
 
         input_df = pd.DataFrame([input_data])
