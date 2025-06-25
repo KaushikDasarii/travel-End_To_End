@@ -5,7 +5,7 @@ import pickle
 app = Flask(__name__)
 
 # Load trained pipeline model
-model = pickle.load(open("model.pkl", "rb"))
+model = pickle.load(open("cleaned_travel.pkl", "rb"))
 
 @app.route("/")
 def home():
